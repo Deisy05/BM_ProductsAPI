@@ -1,21 +1,20 @@
-# Usa una imagen base de Python
-FROM python:3.9
+# Use the official Python base image
+FROM python:3.9-slim
 
-# Configura el directorio de trabajo en /app
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copia los archivos de tu proyecto al contenedor
-COPY . /app
+# Copy the requirements file to the working directory
+COPY requirements.txt .
 
-# Instala las dependencias de tu proyecto (si tienes un archivo requirements.txt)
+# Install the Python dependencies
 RUN pip install -r requirements.txt
 
-# Ejecuta las migraciones de fastapi
-RUN python main.py 
+# Copy the application code to the working directory
+COPY . .
 
-
-# Expone el puerto 8000 (ajusta según tu configuración)
+# Expose the port on which the application will run
 EXPOSE 8686
 
-# Inicia tu aplicación 
-CMD ["python", "main.py"]
+# Run the FastAPI application using uvicorn server
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8686"]
