@@ -3,5 +3,10 @@ version: '3'
 services:
   web:
     image: products-app-bm
+    build: 
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - .:/app
     ports:
       - "8686:8686"  

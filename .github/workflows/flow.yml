@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Publicar imágen
+        name: Publicación de imágen en Docker Hub
         uses: docker/build-push-action@v4
         with:
           push: true
